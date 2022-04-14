@@ -1,0 +1,10 @@
+.productbox{
+    margin: 10px;
+    padding: 6px;
+    transition: 0.8s ease-in-out;
+}
+.productbox:hover{
+    transition: 0.8s ease-in-out;
+    transform: scale(1.1);
+
+}

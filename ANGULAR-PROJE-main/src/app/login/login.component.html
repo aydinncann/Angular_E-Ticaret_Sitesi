@@ -1,0 +1,25 @@
+<main  class="form-signin">
+    <form #loginForm="ngForm" (ngSubmit)= "login(loginForm)"style="text-align: center;">
+      <img class="mb-4" src="../../assets/galeri/login.png" alt="" width="100" height="100">
+      <h1 class="h3 mb-3 fw-normal">Giriş Yap</h1>
+  
+      <div class="form-floating">
+        <input type="text" #userName="ngModel" [(ngModel)]="model.identifier" class="form-control" id="email" name="email" placeholder="E-Mail" required autofocus>
+        <label for="floatingInput">E-Mail</label>
+      </div>
+      <div class="form-floating" style="margin-top: 3%;">
+        <input type="password" class="form-control" id="password" #password="ngModel" [(ngModel)]="model.password" name="password" placeholder="Şifre" required>
+        <label for="floatingPassword">Şifre</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary signOnBtn"   type="submit">Giriş Yap</button>
+      <a class="w-100 btn btn-lg btn-primary signInBtn" routerLink="/app-sign-in">Kayıt Ol</a>
+    
+      <p class="mt-5 mb-3 text-muted">&copy; 2021-2022</p>
+    </form>
+  </main>
+
+
+
+
+
+

@@ -1,0 +1,102 @@
+<h3 class="headerTitle">Ürün Düzenleme</h3>
+
+<div class="form-group" style="margin-top: 10px;text-align: center;">
+    <input
+    type="number"
+    style="width: 50%;display: block;margin:0 auto"
+      class="form-control"
+      id="productName"
+      placeholder="Ürün id ile ürün ara"
+      [(ngModel)]="filterText"
+
+    />
+    <small *ngIf="filterText" class="form-text text-muted" style="display: block;"
+      >Şuan <strong>{{ filterText }}</strong> nolu ürünü aradınız</small
+    >
+  </div> 
+  <div style="text-align: center;margin: 1%;">
+    <button (click)="getProductWihtId(filterText)" type="submit" id="refresh" class="btn btn-primary" >Ürün Filtrele</button>
+  </div>
+
+
+  <div class="row" style="margin:0 0.9%;">
+    <ng-template #noProduct>
+      <div class="alert alert-info" role="alert">Burada urun yok</div>
+    </ng-template>
+  
+    <div
+      *ngFor="let product of products"
+      class="card productbox"
+      style="width: 18rem;"
+    >
+      <img
+        [src]="product.imageUrl"
+        height="288px"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ product.name }}
+         
+        </h5>
+        <h6> {{ product.price | currency: "₺ ":"symbol":"1.2-2" }}</h6>
+        <p class="card-text" style="height: 90px;overflow: auto;">
+          {{ product.description }}
+        </p>
+  
+        <a class="btn btn-primary " id="cansel" data-bs-toggle="modal" (click)="thisProduct(product)" data-bs-target="#exampleModal">Ürün Güncelle</a>
+        <a class="btn btn-danger"  (click)="deleteProduct(product.id)" style="float: right">Ürün Sil</a>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ürün Güncelle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Urun Adı</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputEmail1">
+           
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Urun Aciklama</label>
+            <input type="text" formControlName="description" class="form-control" id="exampleInputEmail1" >
+           
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Urun Resmi</label>
+            <input type="text" formControlName="imageUrl" class="form-control" id="exampleInputEmail1" >
+           
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Urun Fiyatı</label>
+            <input type="text" formControlName="price" class="form-control" id="exampleInputEmail1">
+           
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Urun Kategorisi</label>
+            <select class="form-control"  formControlName="categoryId" required
+                   id="categoryId" name="categoryId">
+            <option *ngFor="let category of categories" [value]="category.id" >{{category.name}}</option>
+        </select>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="putProductData()">Güncelle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

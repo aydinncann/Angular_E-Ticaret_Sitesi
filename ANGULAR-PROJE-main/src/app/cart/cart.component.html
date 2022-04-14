@@ -1,0 +1,59 @@
+<ng-container *ngIf= "products.length != 0" >
+    <div class="container" style="margin-top: 30px;">
+        <div class="card-table">
+            <div class="cart-product">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr >
+                            <th style="width:73px;">Ürün No</th>
+                            <th>Ürün Ad</th>
+                            <th>Ürün Resmi</th>
+                            <th>Açıklama</th>
+                            <th>Fiyat</th>
+                            <th>Miktar</th>
+                            <th>Toplam</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <tr *ngFor= "let item of products; let i = index" >
+                        <td>{{i+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td><img style="width: 120px;" src="{{item.imageUrl}}"></td>
+                        <td style="width: 25%;">{{item.description}}</td>
+                        <td style="width: 12%;">{{item.price}}</td>
+                        <td style="width: 12%;">{{item.quantity}}</td>
+                        <td style="width: 12%;">₺{{item.total}}</td>
+                        <td>
+                            <button (click)= "removeItem(item)" class="btn btn-danger" ><i class='fa fa-trash-o' style='font-size:18px'></i></button>
+                        </td>
+                       </tr>
+                       <tr>
+                           <td colspan="4"></td>
+                           <td><button class="btn btn-danger" style="width: 140px;" (click)= "emptyCart()">Sepeti Boşalt</button></td>
+                           <td><button class="btn btn-primary" style="width: 180px;" routerLink="/products">Alışverişe Devam Et</button></td>
+                           <td><button class="btn btn-success" routerLink="/app-checkout">Satın Al</button></td>
+                           <td><strong>Toplam Tutar : ₺{{grandTotal}}</strong></td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</ng-container>
+<ng-container *ngIf= "products.length == 0">
+    <div class="container">
+        <div class="card">
+            <h5 class="card-title">
+                Sepetim
+            </h5>
+        </div>
+        <div class="center">
+            <img src="../../assets/galeri/cart.png" alt="sepet">
+            <h4>Sepetiniz Bos</h4>
+            <h6>Hemen Alısverise Baslayin</h6>
+            <button class="btn btn-primary" routerLink="/products">Shop</button>
+        </div>
+    </div>
+</ng-container>
